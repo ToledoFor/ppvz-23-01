@@ -1,17 +1,7 @@
 <h2>This is the content section</h2>
 
 <?php
-
-    // $arr = [
-    //     0 => 'v1',
-    //     '1' => 'v2',
-    //     'key123' => 'v3',
-    //     10 => 'v4',
-    //     3 => 'v5',       
-    // ];  
-    
-    // var_dump($arr);
-
+    //echo dirname(__FILE__) . "/tasks/task-{$task}.php";
 
     // print_r($_GET);
 
@@ -23,19 +13,31 @@
         // echo $task . '<br>';
         // echo $_GET['task'];
 
-
         // $filePath = "tasks/task-{$task}.php";
         // // TODO необхідно перевірити файл на наявність
         // include($filePath); 
 
-        switch ($task) {
-            case 1:
-                include('tasks/task-1.php'); 
-                break;
-            
-            default:
-                include('tasks/task-no-found.php');     
+        $filePath = dirname(__FILE__) . "/tasks/task-{$task}.php";
+        if (file_exists($filePath)) {
+            include($filePath);
+        } else {
+            //echo 'File not found';
+            include('tasks/task-no-found.php'); 
         }
+        
+        // switch ($task) {
+        //     case 1:
+        //         include('tasks/task-1.php'); 
+        //         break;
+            
+        //     case 4:
+        //         include('tasks/task-4.php');
+        //         break;
+
+        //     default:
+        //         include('tasks/task-no-found.php');                     
+        // }
+
     } else {
         echo 'Key task is not defined!';
     }
