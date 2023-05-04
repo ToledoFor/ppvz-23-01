@@ -8,6 +8,25 @@
 
         // Do Stuff
 
+        $db_host = 'localhost';
+        $db_name = 'practice';
+        $db_user = 'practice';
+        $db_pass = 'password';
+
+        $conn = new mysqli($db_host, $db_user, $db_pass, $db_name);
+
+        if ($conn->connect_error) {
+            die('DB connection error: ' . $conn->connect_error);
+        }
+
+        // 'text'); DROP 
+        $sql = "INSERT INTO submits (name, email, message) VALUES ('{$name}', '{$email}', '{$message}')";
+        if ($conn->query($sql) === true) {
+            echo 'New submit saved successfully.';
+        } else {
+            echo 'Error: ' . $conn->error;
+        }
+
         echo "<p>Name: {$name}</p>";
         echo "<p>Email: {$email}</p>";
         echo "<p>Message: {$message}</p>";
