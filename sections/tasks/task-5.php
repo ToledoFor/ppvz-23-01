@@ -13,10 +13,34 @@ if ($conn->connect_error) {
     die('DB connection error: ' . $conn->connect_error);
 }
 
-$res = $conn->query('SELECT * FROM submits');
-if ($res->num_rows > 0) {
-    ?>
+$where = '';
+$filter = '';
+if (isset($_GET['filter'])) {
+    $filter = trim(filter_var($_GET['filter'], FILTER_SANITIZE_STRING));
 
+    if ($filter !== '') {
+        $where = ' WHERE name LIKE "%'.$filter.'%"';
+    }
+}
+?>
+
+<form action="">
+    <label for="search">Search in the table:</label>
+    <input type="text" name="filter" id="search" value="<?= $filter ?>">
+    <input type="hidden" name="task" value="5">
+    <button>Search</button>  
+</form>
+<hr>
+<?php
+
+$res = $conn->query('SELECT * FROM submits' . $where );
+if ($res->num_rows > 0) {
+
+    if ($filter !== '') {
+        echo "<p>Active filter: $filter</p>";
+    }
+
+    ?>    
     <table border=1>
         <thead>
             <tr>
@@ -36,4 +60,6 @@ if ($res->num_rows > 0) {
     </table>
 
     <?php
+} else {
+    echo '<p>Not found!</p>';
 }

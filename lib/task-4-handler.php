@@ -7,7 +7,6 @@
         $message = isset($_POST['cf-message']) ? htmlspecialchars($_POST['cf-message']) : '';
 
         // Do Stuff
-
         $db_host = 'localhost';
         $db_name = 'practice';
         $db_user = 'practice';
