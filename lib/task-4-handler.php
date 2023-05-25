@@ -26,6 +26,16 @@
             echo 'Error: ' . $conn->error;
         }
 
+        // Send email
+        $to = "dmitriy@olhovsky.name";
+        $subject = "Test Message Subject";
+        $body = "Test message";
+        $headers = "From: dmitriy@olhovsky.name";
+
+        $email_ok = mail($to, $subject, $body, $headers);
+
+        echo "Email send: " . ($email_ok ? 'successfully' : 'error');
+        
         echo "<p>Name: {$name}</p>";
         echo "<p>Email: {$email}</p>";
         echo "<p>Message: {$message}</p>";

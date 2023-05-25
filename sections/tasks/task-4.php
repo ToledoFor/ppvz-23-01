@@ -27,7 +27,7 @@
             //evt.target.submit();
 
             fetch('/ppvz-2023/practice-03/lib/task-4-handler.php', {
-                method: 'POST',
+                method: 'POST',                
                 body: new FormData(evt.target),
             })
             // 1.
